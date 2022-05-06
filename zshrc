@@ -63,17 +63,18 @@ export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
 # Encoding stuff for the terminal
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 
 export NVM_DIR="/home/anders/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
-export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
+source /home/anders/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+echo "Did you know that:"; whatis $(ls -1 /bin | head -$(echo "$RANDOM % `ls -1 /bin | wc -l`" | bc) | tail -1)
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+fargate() {
+  cd ~/code/Jarmam-Productions/seraphin/seraphinWeb
+  chmod +x fargate_scripts/local_scripts/fargate.sh
+  fargate_scripts/local_scripts/fargate.sh $@
+}

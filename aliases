@@ -3,7 +3,78 @@ alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
 
 # Quickly serve the current directory as HTTP
-alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
+alias serve='ruby -run -e httpd . -p 8000'  # Or python -m SimpleHTTPServer :)
 
-# NOTE: On Q3 2021, Le Wagon decided to change the Web Dev curriculum default text editor
-alias stt="echo 'Launching VS Code instead of Sublime Text... (cf ~/.aliases)' && code ."
+alias gst="git status"
+alias gcp="git checkout production"
+alias gsw="git sweep cleanup"
+alias gswp="git branch --merged master | grep -v '^[ *]*master$' | xargs git branch -d"
+
+# Mistress support
+alias gcmi="git checkout mistress"
+alias gswpmi="git branch --merged mistress | grep -v '^[ *]*mistress$' | xargs git branch -d"
+
+# PUSH current branch
+gps() {
+  git push origin $(git branch | grep \* | cut -d ' ' -f2-)
+}
+
+# PULL current branch
+gpl() {
+  git pull origin $(git branch | grep \* | cut -d ' ' -f2-)
+}
+
+# Facepalm
+facepalm() {
+  curl -X POST -H 'Content-Type: application/json' -d '{ "description": "'"$1"'", "author": "'"$2"'" }' https://jar-luc.herokuapp.com/api/v1/palmies
+}
+
+# Bundle exec
+alias be="bundle exec"
+
+# Visual Studio Code aliases
+alias vs="code ."
+
+# File alias
+alias exp="xdg-open ."
+
+# SeraphinWeb + Ardor initialization
+alias seraphin="cd /home/anders/code/Jarmam-Productions/seraphin/seraphinWeb"
+alias ardor="cd /home/anders/code/Jarmam-Productions/seraphin/ardor"
+alias serverless="cd /home/anders/code/Jarmam-Productions/seraphin/serverless"
+alias design="cd /home/anders/code/Jarmam-Productions/seraphin/design"
+alias ards="ardor; npm run serve"
+alias sws="seraphin; redis-server --daemonize yes; bundle exec sidekiq start"
+alias swwp="seraphin; bundle exec bin/webpack-dev-server"
+alias sw="seraphin; rails s -p 8080"
+alias gopher="foreman start -f ./ProcfileForeman"
+
+# NGROK
+ngrok() {
+  cd ~/Downloads; (sleep 1; open $(curl -s http://localhost:4040/api/tunnels | egrep -o 'https:\/\/.*.ngrok.io' | xargs -I{} echo "https://chart.googleapis.com/chart?cht=qr&chl={}&chs=180x180&choe=UTF-8&chld=L%7C2")) & ./ngrok http $1
+}
+
+alias aws-repo-login='aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 683492204074.dkr.ecr.eu-central-1.amazonaws.com'
+
+# Other directory shortcuts
+alias javascr="cd /home/anders/code/Jarmam-Productions/js"
+alias vuecourse="cd /home/anders/code/Jarmam-Productions/js/VueJS"
+
+alias wp="bundle exec bin/webpack-dev-server"
+
+reset-feature-branch-1() {
+  CURRENT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2-)
+  if [[ "$CURRENT_BRANCH" != "feature-branch-1" ]]; then
+    echo 'Aborting script not on feature-branch-1';
+  fi
+  if [[ "$CURRENT_BRANCH" == "feature-branch-1" ]]; then
+    echo 'Resetting feature-branch-1 to master and deleting all commits';
+    git reset --hard origin/master
+    git push origin HEAD --force
+  fi
+}
+
+
+alias uol="cd /home/anders/code/Jarmam-Productions/UnionOfLetters"
+alias cai="cd /home/anders/code/Jarmam-Productions/checks-and-imbalances"
+
